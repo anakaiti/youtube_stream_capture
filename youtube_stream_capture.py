@@ -443,7 +443,7 @@ def run_script():
 					dash_tries += 1
 					time.sleep(4)
 
-			os.system("aria2c -c --auto-file-renaming=false --max-tries=100 --retry-wait=5 -j 3 -x 3 -s 3 -k 1M \"{}\" -d \"{}\" -o \"{}\"".format(video_segment_list[segment_number], output_directory, f"{segment_number}_{filename_thing}_video.ts"))
+			os.system("aria2c -l /dev/null i-c --auto-file-renaming=false --max-tries=100 --retry-wait=5 -j 3 -x 3 -s 3 -k 1M \"{}\" -d \"{}\" -o \"{}\"".format(video_segment_list[segment_number], output_directory, f"{segment_number}_{filename_thing}_video.ts"))
 			while(True):
 				try:
 					r = session.head(audio_segment_list[segment_number])
@@ -453,7 +453,7 @@ def run_script():
 				except:
 					time.sleep(2)
 
-			os.system("aria2c -c --auto-file-renaming=false --max-tries=100 --retry-wait=5 -j 3 -x 3 -s 3 -k 1M \"{}\" -d \"{}\" -o \"{}\"".format(audio_segment_list[segment_number], output_directory, f"{segment_number}_{filename_thing}_audio.ts"))
+			os.system("aria2c -l /dev/null -c --auto-file-renaming=false --max-tries=100 --retry-wait=5 -j 3 -x 3 -s 3 -k 1M \"{}\" -d \"{}\" -o \"{}\"".format(audio_segment_list[segment_number], output_directory, f"{segment_number}_{filename_thing}_audio.ts"))
 			try:
 				if pathlib.Path(output_directory / f"{segment_number}_{filename_thing}_video.ts").stat().st_size < 2000 or pathlib.Path(output_directory / f"{segment_number}_{filename_thing}_audio.ts").stat().st_size < 2000:
 					segment_number -= 4
